@@ -1,1 +1,278 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --shadow-color: -4px -4px 13px 4px #fff, 4px 4px 13px 4px #c4c4c4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  min-height: 100vh;
+  background-color: #eee;
+}
+
+.form {
+  border-radius: 16px;
+  padding: 32px;
+  width: 800px;
+  box-shadow: -2px -2px 6px 2px #fff, 2px 2px 6px 2px #c4c4c4;
+  display: flex;
+}
+
+h3 {
+  color: #aabbbb;
+  font-size: 28px;
+  font-weight: 700;
+  text-shadow: 2px 2px 2px #fff, -1px -1px -1px #a4a4a4;
+  text-align: center;
+  margin-bottom: 16px;
+  margin-top: 10rem;
+
+}
+
+.input {
+  appearance: none;
+  border: none;
+  background: none;
+  outline: none;
+  border-radius: 16px;
+  padding: 16px;
+
+  // display: block;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 16px;
+  color: #aaa;
+  font-size: 18px;
+  box-shadow: inset -4px -4px 10px 4px #fff, inset 4px 4px 10px 4px #c4c4c4;
+  transition: 0.2s ease-out;
+}
+.input.btn {
+  appearance: none;
+  border: none;
+  background: none;
+  outline: none;
+  border-radius: 16px;
+  padding: 16px;
+
+  // display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto 16px;
+  color: #aaa;
+  font-size: 18px;
+  box-shadow: inset -4px -4px 10px 4px #fff, inset 4px 4px 10px 4px #c4c4c4;
+  transition: 0.2s ease-out;
+}
+
+.input::placeholder {
+  color: #ccc;
+}
+
+.input:focus {
+  box-shadow: inset -1px -1px 3px 1px #fff, inset 1px 1px 3px 1px #c4c4c4;
+}
+
+.btn {
+  color: #aabbbb;
+  cursor: pointer;
+  border: 3px solid transparent;
+  padding: 13px;
+  font-weight: 700;
+  box-shadow: var(--shadow-color);
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.btn:focus {
+  box-shadow: var(--shadow-color);
+}
+
+.btn:hover {
+  box-shadow: -3px -3px 8px 3px #fff, 3px 3px 8px 3px #c4c4c4;
+}
+
+.btn:active {
+  color: #ff5858;
+  box-shadow: var(--shadow-color);
+  border-color: #dfdfdf ;
+}
+
+.btn.active {
+  color: #ff5858;
+  box-shadow: -2px -2px 8px #c4c4c4, 2px 2px 8px 2px #fff;
+  border-color: #dfdfdf;
+}
+
+.btn:disabled {
+  box-shadow: -3px -3px 8px 3px #fff, 3px 3px 8px 3px #c4c4c4;
+
+}
+
+small {
+  font-size: 1rem;
+}
+
+.result {
+  margin-top: 32px;
+}
+
+.result {
+  display: grid;
+  grid-template-columns: 4fr 2fr 1fr;
+  align-items: center;
+}
+
+.btn-copy {
+  appearance: none;
+  border: none;
+  background-color: #aabbbb;
+  outline: none;
+  border-radius: 16px;
+  padding: 16px;
+  cursor: pointer;
+
+  // display: block;
+  width: 100%;
+  max-width: 200px;
+  // margin: 0 auto 16px;
+  color: white;
+  font-size: 12px;
+  box-shadow: -3px -3px 8px 3px #fff, 3px 3px 8px 3px #c4c4c4;
+  transition: 0.2s ease-out;
+}
+
+.btn-copy:focus {
+  box-shadow: var(--shadow-color);
+}
+
+.btn-copy:hover {
+  box-shadow: -3px -3px 8px 3px #fff, 3px 3px 8px 3px #c4c4c4;
+}
+
+.btn-copy:active {
+  color: #ff5858;
+  box-shadow: var(--shadow-color);
+  border-color: #dfdfdf ;
+}
+
+.result.form {
+  padding: 20px;
+}
+
+a,
+a:link,
+a:active {
+  // text-decoration: none;
+  color: #9c9c9c;
+}
+
+@media only screen and (max-width: 970px) {
+  .form {
+    max-width: 600px;
+  }
+
+  .input.btn {
+    max-width: 150px;
+  }
+
+  .input {
+    max-width: 300px;
+  }
+
+  .result {
+    display: grid;
+    grid-template-columns: 3fr 2fr 1fr;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+}
+
+
+@media only screen and (max-width: 640px) {
+  .form {
+    max-width: 500px;
+  }
+  .input.btn {
+    max-width: 100px;
+    font-size: 12px;
+
+  }
+
+  .result {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+
+  .input {
+    max-width: 250px;
+  }
+}
+
+@media only screen and (max-width: 536px) {
+  .form {
+    flex-direction: column;
+    max-width: 375px;
+  }
+
+  .input.btn {
+    max-width: 200px;
+    font-size: 18px;
+
+  }
+
+  .input {
+    max-width: 400px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .form {
+    padding: 15px;
+  }
+
+  h3 {
+    margin-top: 5rem;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .form {
+    max-width: 300px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
+
+  .input {
+    font-size: 12px;
+  }
+
+  .input.btn {
+    font-size: 12px;
+  }
+
+  h3 {
+    font-size: 18px;
+
+    small {
+      font-size: 0.7rem;
+    }
+  }
+}
+
+
+

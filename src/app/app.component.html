@@ -5,13 +5,13 @@
   <button class="input btn" [disabled]="shortenForm.invalid">Shorten it!</button>
 </form>
 
-<div class="result form" *ngFor="let link of links">
-  <a [href]='link.url' target="_blank">{{link.url}}</a>
+<div class="result form" *ngIf="linkShortened">
+  <a [href]='link.url' target="_blank">{{linkToBeShortened}}</a>
 
 
-  <a [href]='link.hashid' target="_blank">{{link.hashid}} </a>
+  <a [href]='linkShortened' target="_blank">{{linkShortened}} </a>
 
 
-  <button class="btn-copy" ngxClipboard [cbContent]="link.hashid"
-    (click)="changeName(link)">{{ link.copy ? 'Copied' : 'Copy'}}</button>
+  <button class="btn-copy" ngxClipboard [cbContent]="linkShortened" (click)="changeName(link)">{{ link.copy ? 'Copied' :
+    'Copy'}}</button>
 </div>

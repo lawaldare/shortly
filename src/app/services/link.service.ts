@@ -14,6 +14,11 @@ export class LinkService {
 
 
   sendLink(link: string) {
-    return this.http.post(this.BASE_URL, { "url": link }, { headers: new HttpHeaders().append('Content-Type', 'application/json') });
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+      })
+    };
+    return this.http.post(this.BASE_URL, { "url": link }, httpOptions);
   }
 }

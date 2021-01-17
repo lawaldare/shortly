@@ -1,7 +1,7 @@
 import { Link } from './model/link.model';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { LinkService } from './services/link.service';
+import { NgTinyUrlService } from 'ng-tiny-url';
 
 @Component({
   selector: 'app-root',
@@ -11,20 +11,19 @@ import { LinkService } from './services/link.service';
 export class AppComponent {
   title = 'link-shorter';
   links: any[] = [];
+  linkToBeShortened: string;
+  linkShortened: string;
   copy: boolean = false;
-  constructor(private linkService: LinkService) {
+  constructor(private tinyUrl: NgTinyUrlService) {
 
   }
 
 
   onSubmit(form: NgForm) {
-    let link: string = form.value.link;
-    if (link.includes('http://') || link.includes('https://')) {
-      this.linkService.sendLink(link).subscribe(data => {
-        data['hashid'] = `https://rel.ink/${data['hashid']}`;
-        data['copy'] = false;
-        this.links.push(data);
-        form.resetForm();
+    this.linkToBeShortened = form.value.link;;
+    if (this.linkToBeShortened.includes('http://') || this.linkToBeShortened.includes('https://')) {
+      this.tinyUrl.shorten(this.linkToBeShortened).subscribe(data => {
+        this.linkShortened = data;
       })
     } else {
       alert('Please enter a valid URL with http:// or https://');

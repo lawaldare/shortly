@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  base_url: 'https://rel.ink/api/links/'
+  // base_url: 'https://cors-anywhere.herokuapp.com/https://rel.ink/api/links/'
 };
 
 /*

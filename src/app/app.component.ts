@@ -14,6 +14,7 @@ export class AppComponent {
   linkToBeShortened: string;
   linkShortened: string;
   copy: boolean = false;
+  loaded: boolean = false;
   constructor(private tinyUrl: NgTinyUrlService) {
 
   }
@@ -22,8 +23,13 @@ export class AppComponent {
   onSubmit(form: NgForm) {
     this.linkToBeShortened = form.value.link;;
     if (this.linkToBeShortened.includes('http://') || this.linkToBeShortened.includes('https://')) {
+      this.loaded = true;
       this.tinyUrl.shorten(this.linkToBeShortened).subscribe(data => {
         this.linkShortened = data;
+        this.loaded = false;
+      }, error => {
+        this.loaded = false;
+        console.log(error);
       })
     } else {
       alert('Please enter a valid URL with http:// or https://');

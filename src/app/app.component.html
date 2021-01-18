@@ -2,11 +2,14 @@
 <form class="form" #shortenForm="ngForm" (ngSubmit)="shortenForm.form.valid && onSubmit(shortenForm)">
   <input type="text" class="input" placeholder="Shorten a link here" #link="ngModel" ngModel name="link" required
     autocomplete="off">
-  <button class="input btn" [disabled]="shortenForm.invalid">Shorten it!</button>
+  <button class="input btn" [disabled]="shortenForm.invalid">
+    {{ loaded ? 'Shortening...' : 'Shorten it!' }}
+    <i class="fa fa-1x fa-spinner fa-spin" *ngIf="loaded"></i>
+  </button>
 </form>
 
 <div class="result form" *ngIf="linkShortened">
-  <a [href]='link.url' target="_blank">{{linkToBeShortened}}</a>
+  <a [href]='linkToBeShortened' target="_blank">{{linkToBeShortened}}</a>
 
 
   <a [href]='linkShortened' target="_blank">{{linkShortened}} </a>

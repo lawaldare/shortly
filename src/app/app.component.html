@@ -15,6 +15,6 @@
   <a [href]='linkShortened' target="_blank">{{linkShortened}} </a>
 
 
-  <button class="btn-copy" ngxClipboard [cbContent]="linkShortened" (click)="changeName(link)">{{ link.copy ? 'Copied' :
+  <button class="btn-copy" ngxClipboard [cbContent]="linkShortened" (click)="changeName()">{{ copy ? 'Copied' :
     'Copy'}}</button>
 </div>

@@ -37,7 +37,7 @@ export class AppComponent {
     }
   }
 
-  changeName(link: Link): void {
-    link.copy = true;
+  changeName(): void {
+    this.copy = true;
   }
 }

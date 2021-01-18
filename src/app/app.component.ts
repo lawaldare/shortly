@@ -10,23 +10,29 @@ import { NgTinyUrlService } from 'ng-tiny-url';
 })
 export class AppComponent {
   title = 'link-shorter';
-  links: any[] = [];
+  links: Link[] = [];
   linkToBeShortened: string;
   linkShortened: string;
   copy: boolean = false;
   loaded: boolean = false;
+  isLoading: boolean = false;
   constructor(private tinyUrl: NgTinyUrlService) {
 
   }
 
 
   onSubmit(form: NgForm) {
-    this.linkToBeShortened = form.value.link;;
-    if (this.linkToBeShortened.includes('http://') || this.linkToBeShortened.includes('https://')) {
+    if (form.value.link.includes('http://') || form.value.link.includes('https://')) {
       this.loaded = true;
-      this.tinyUrl.shorten(this.linkToBeShortened).subscribe(data => {
-        this.linkShortened = data;
+      this.tinyUrl.shorten(form.value.link).subscribe(data => {
+        this.isLoading = true;
+        let link: any = {};
+        link.linkToBeShortened = form.value.link;
+        link.linkShortened = data;
+        link.copy = false;
+        this.links.push(link);
         this.loaded = false;
+        form.resetForm();
       }, error => {
         this.loaded = false;
         console.log(error);
@@ -37,7 +43,7 @@ export class AppComponent {
     }
   }
 
-  changeName(): void {
-    this.copy = true;
+  changeName(link: Link): void {
+    link.copy = true;
   }
 }

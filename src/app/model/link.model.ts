@@ -1,6 +1,5 @@
 export interface Link {
-  hashid: string;
-  url: string;
-  created_at: string;
+  linkToBeShortened: string;
+  linkShortened: string;
   copy: boolean;
 }

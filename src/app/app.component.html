@@ -8,13 +8,16 @@
   </button>
 </form>
 
-<div class="result form" *ngIf="linkShortened">
-  <a [href]='linkToBeShortened' target="_blank">{{linkToBeShortened}}</a>
+<<ng-container *ngIf="isLoading">
+  <div class="result form" *ngFor="let link of links">
+    <a [href]='linkToBeShortened' target="_blank">{{link.linkToBeShortened}}</a>
 
 
-  <a [href]='linkShortened' target="_blank">{{linkShortened}} </a>
+    <a [href]='linkShortened' target="_blank">{{link.linkShortened}} </a>
 
 
-  <button class="btn-copy" ngxClipboard [cbContent]="linkShortened" (click)="changeName()">{{ copy ? 'Copied' :
-    'Copy'}}</button>
-</div>
+    <button class="btn-copy" ngxClipboard [cbContent]="link.linkShortened" (click)="changeName(link)">{{ link.copy ?
+      'Copied' :
+      'Copy'}}</button>
+  </div>
+  </ng-container>

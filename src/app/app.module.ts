@@ -1,31 +1,29 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
 
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { FormsModule } from "@angular/forms";
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from "@angular/common/http";
 
-import { ClipboardModule } from 'ngx-clipboard';
+import { ClipboardModule } from "ngx-clipboard";
 
-import { NgTinyUrlModule, NgTinyUrlService } from 'ng-tiny-url';
-
-
+import { NgTinyUrlModule, NgTinyUrlService } from "ng-tiny-url";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
     FormsModule,
     ClipboardModule,
-    NgTinyUrlModule
+    NgTinyUrlModule,
   ],
-  providers: [NgTinyUrlService],
-  bootstrap: [AppComponent]
+  providers: [NgTinyUrlService, provideHttpClient(withInterceptorsFromDi())],
 })
-export class AppModule { }
+export class AppModule {}

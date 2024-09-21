@@ -1,44 +1,43 @@
-import { Link } from './model/link.model';
-import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { NgTinyUrlService } from 'ng-tiny-url';
+import { Link } from "./model/link.model";
+import { Component, inject, signal } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { LinkService } from "./services/link.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  title = 'link-shorter';
-  links: Link[] = [];
-  linkToBeShortened: string;
-  linkShortened: string;
-  copy: boolean = false;
-  loaded: boolean = false;
-  isLoading: boolean = false;
-  constructor(private tinyUrl: NgTinyUrlService) {
-
-  }
-
+  public links = signal<Link[]>([]);
+  buttonLoading = signal<boolean>(false);
+  isLoading = signal<boolean>(false);
+  private readonly linkService = inject(LinkService);
 
   onSubmit(form: NgForm) {
-    if (form.value.link.includes('http://') || form.value.link.includes('https://')) {
-      this.loaded = true;
-      this.tinyUrl.shorten(form.value.link).subscribe(data => {
-        this.isLoading = true;
-        let link: any = {};
-        link.linkToBeShortened = form.value.link;
-        link.linkShortened = data;
-        link.copy = false;
-        this.links.push(link);
-        this.loaded = false;
-        form.resetForm();
-      }, error => {
-        this.loaded = false;
-        console.log(error);
-      })
+    if (
+      form.value.link.includes("http://") ||
+      form.value.link.includes("https://")
+    ) {
+      this.buttonLoading.set(true);
+      this.linkService.shorten(form.value.link).subscribe(
+        (data: any) => {
+          this.isLoading.set(true);
+          const link: Link = {} as Link;
+          link.linkToBeShortened = form.value.link;
+          link.linkShortened = data.error.text ? data.error.text : data;
+          link.copy = false;
+          this.links.update((links) => [...links, link]);
+          this.buttonLoading.set(false);
+          form.resetForm();
+        },
+        (error) => {
+          this.buttonLoading.set(false);
+          // console.log(error);
+        }
+      );
     } else {
-      alert('Please enter a valid URL with http:// or https://');
+      alert("Please enter a valid URL with http:// or https://");
       form.resetForm();
     }
   }

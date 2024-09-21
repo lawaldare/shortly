@@ -1,23 +1,40 @@
 <h3 class="title">Shortly... <small>best way to shorten your links</small></h3>
-<form class="form" #shortenForm="ngForm" (ngSubmit)="shortenForm.form.valid && onSubmit(shortenForm)">
-  <input type="text" class="input" placeholder="Shorten a link here" #link="ngModel" ngModel name="link" required
-    autocomplete="off">
+<form
+  class="form"
+  #shortenForm="ngForm"
+  (ngSubmit)="shortenForm.form.valid && onSubmit(shortenForm)"
+>
+  <input
+    type="text"
+    class="input"
+    placeholder="Shorten a link here"
+    #link="ngModel"
+    ngModel
+    name="link"
+    required
+    autocomplete="off"
+  />
   <button class="input btn" [disabled]="shortenForm.invalid">
-    {{ loaded ? 'Shortening...' : 'Shorten it!' }}
-    <i class="fa fa-1x fa-spinner fa-spin" *ngIf="loaded"></i>
+    {{ buttonLoading() ? "Shortening..." : "Shorten it!" }}
+    <i class="fa fa-1x fa-spinner fa-spin" *ngIf="buttonLoading()"></i>
   </button>
 </form>
 
 <<ng-container *ngIf="isLoading">
-  <div class="result form" *ngFor="let link of links">
-    <a [href]='linkToBeShortened' target="_blank">{{link.linkToBeShortened}}</a>
+  <div class="result form" *ngFor="let link of links()">
+    <a [href]="link.linkToBeShortened" target="_blank">{{
+      link.linkToBeShortened
+    }}</a>
 
+    <a [href]="link.linkShortened" target="_blank">{{ link.linkShortened }} </a>
 
-    <a [href]='linkShortened' target="_blank">{{link.linkShortened}} </a>
-
-
-    <button class="btn-copy" ngxClipboard [cbContent]="link.linkShortened" (click)="changeName(link)">{{ link.copy ?
-      'Copied' :
-      'Copy'}}</button>
+    <button
+      class="btn-copy"
+      ngxClipboard
+      [cbContent]="link.linkShortened"
+      (click)="changeName(link)"
+    >
+      {{ link.copy ? "Copied" : "Copy" }}
+    </button>
   </div>
-  </ng-container>
+</ng-container>

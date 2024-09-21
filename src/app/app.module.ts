@@ -12,18 +12,10 @@ import {
 
 import { ClipboardModule } from "ngx-clipboard";
 
-import { NgTinyUrlModule, NgTinyUrlService } from "ng-tiny-url";
-
 @NgModule({
   declarations: [AppComponent],
   bootstrap: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ClipboardModule,
-    NgTinyUrlModule,
-  ],
-  providers: [NgTinyUrlService, provideHttpClient(withInterceptorsFromDi())],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ClipboardModule],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
 })
 export class AppModule {}

@@ -16,11 +16,13 @@
   />
   <button class="input btn" [disabled]="shortenForm.invalid">
     {{ buttonLoading() ? "Shortening..." : "Shorten it!" }}
-    <i class="fa fa-1x fa-spinner fa-spin" *ngIf="buttonLoading()"></i>
+    @if(buttonLoading()){
+    <i class="fa fa-1x fa-spinner fa-spin"></i>
+    }
   </button>
 </form>
 
-<<ng-container *ngIf="isLoading">
+<ng-container *ngIf="isLoading()">
   <div class="result form" *ngFor="let link of links()">
     <a [href]="link.linkToBeShortened" target="_blank">{{
       link.linkToBeShortened
